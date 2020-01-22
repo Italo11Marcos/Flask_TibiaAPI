@@ -1,0 +1,70 @@
+{% extends "template.html" %}
+<!--criamos um bloco de conteúdo a ser interpretado pelo python-->
+{% block conteudo %}
+<form action="{{ url_for('criaTibia') }}" method="POST">
+    <fieldset>
+      <div class="form-group">
+        <label for="nome">Character Name</label>
+        <input type="text"name="name" class="form-control">
+      </div>
+      <button type="submit" class="btn btn-primary btn-salvar">Enviar</button>
+    </fieldset>
+</form>
+
+<form action="{{ url_for('worldsTibia') }}" method="POST">
+    <fieldset>
+      <div class="form-group">
+        <label for="world">World Name</label>
+        <input type="text" name="world" class="form-control">
+      </div>
+      <button type="submit" class="btn btn-primary btn-salvar">Enviar</button>
+    </fieldset>
+</form>
+
+<br>
+
+{% if info %}
+<div class="card" style="width: 18rem;">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Name: {{ name }}</li>
+        <li class="list-group-item">Level: {{ info[0] }}</li>
+        <li class="list-group-item">Residence: {{ info[1] }}</li>
+        <li class="list-group-item">Sex: {{ info[2] }}</li>
+        <li class="list-group-item">Status: {{ info[3] }}</li>
+        <li class="list-group-item">Vocation: {{ info[4] }}</li>
+        <li class="list-group-item">World: {{ info[5] }}</li>
+    </ul>
+</div>
+{% endif %}
+
+
+{% if currentOnline %}
+
+<h3>{{ currentOnline }} players online</h3>
+
+<div class="card" style="width: 18rem;">
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Level</th>
+                <th scope="col">Vocation</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in range(tam) %}
+            <tr>
+                <th>{{ name[i] }}</th>
+                <th>{{ level[i] }}</th>
+                <th>{{ vocation[i] }}</th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</div>
+{% endif %}
+
+{% endblock %}
+<!--encerramos o bloco de código a ser interpretado pelo python--
